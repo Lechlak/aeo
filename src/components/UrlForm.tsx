@@ -20,21 +20,27 @@ export const UrlForm: React.FC<UrlFormProps> = ({ onAnalyze, isLoading }) => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!url.trim()) {
-      setError('Please enter a URL');
-      return;
-    }
+  e.preventDefault();
 
-    if (!validateUrl(url)) {
-      setError('Please enter a valid URL (e.g., https://example.com)');
-      return;
-    }
+  if (!url.trim()) {
+    setError('Please enter a URL');
+    return;
+  }
 
-    setError(null);
-    onAnalyze(url);
-  };
+  let normalizedUrl = url.trim();
+  if (!/^https?:\/\//i.test(normalizedUrl)) {
+    normalizedUrl = 'https://' + normalizedUrl;
+  }
+
+  if (!validateUrl(normalizedUrl)) {
+    setError('Please enter a valid URL (e.g., https://example.com)');
+    return;
+  }
+
+  setError(null);
+  onAnalyze(normalizedUrl);
+};
+
 
   return (
     <div className="bg-white shadow rounded-lg p-6 mb-8">

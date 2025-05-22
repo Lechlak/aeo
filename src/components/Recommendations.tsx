@@ -131,11 +131,6 @@ export const Recommendations: React.FC<RecommendationsProps> = ({ recommendation
                   Learn more
                 </button>
               </div>
-              <div className="ml-auto flex-shrink-0">
-                <button className="text-sm px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-50">
-                  Apply
-                </button>
-              </div>
             </div>
           ))
         )}
